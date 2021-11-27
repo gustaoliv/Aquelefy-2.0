@@ -1,14 +1,15 @@
 #include <iostream>
+#include "artista.h"
 using namespace std;
 #include <fstream>
 
 class Musica{
     private:
         int id;
-        char nomeMusica[100];
-        char nomeArtista[100];
-        char estiloMusica[100];
-        int tempo; //segundos
+        char nome[100];
+        Artista artista;
+        char estilo[100];
+        int duracao; //segundos
         //data cadastro
         short dataDia;
         short dataMes;
@@ -46,10 +47,10 @@ class Musica{
         //sobrecarga do operador de inserção de dados
         friend ostream& operator<<(ostream& os, const Musica& m){
             os << m.id << "\n";
-            os << m.nomeMusica << "\n";
-            os << m.nomeArtista << "\n";
-            os << m.estiloMusica << "\n";
-            os << m.tempo << "\n";
+            os << m.nome << "\n";
+            os << m.artista << "\n";
+            os << m.estilo << "\n";
+            os << m.duracao << "\n";
             os << m.dataDia << "\n";
             os << m.dataMes << "\n";
             os << m.dataAno << "\n";
@@ -58,10 +59,10 @@ class Musica{
         //sobrecarga do operador de extração de dados
         friend istream& operator>>(istream& is, Musica& m){
             is >> m.id 
-               >> m.nomeMusica 
-               >> m.nomeArtista 
-               >> m.estiloMusica 
-               >> m.tempo 
+               >> m.nome
+               >> m.artista
+               >> m.estilo
+               >> m.duracao 
                >> m.dataDia 
                >> m.dataMes 
                >> m.dataAno;

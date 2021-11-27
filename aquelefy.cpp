@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <iomanip>
+#include <string.h>
 using namespace std;
 
 int menu(){
@@ -16,8 +17,8 @@ int menu(){
     cout << "1 - Cadastrar musica" << endl;
     cout << "2 - Listar musicas cadastradas" << endl;
     cout << "3 - Pesquisar musica" << endl;
-    cout << "4 - Tempo total das musicas cadastras" << endl;
-    cout << "5 - Musica com maior e menor duracao" << endl;
+    cout << "4 - Listar artistas disponiveis" << endl;
+    cout << "5 - Cadastrar novo artista" << endl;
     cout << "\nEscolha sua opcao: "; cin >> resp;
     return resp;
 }
@@ -95,42 +96,45 @@ int main(){
         }
         else if(resp == 4){
             system("clear||cls");
-            Musica musica;
-            int total = 0;
-            ifstream ifs("dados.dat", ios_base::in);
+            ifstream ifs("artistas.dat", ios_base::in);
+            Artista artista;
+            cout << setw(5) << left << "ID" << " | " << setw(50) << left << "NOME DO ARTISTA" << " | "  << setw(50) << left << "TIPO"  << " | " << setw(50) << left << "ESTILO"  << " | " << endl;
+            cout << "-------------------------------------------------------------------------------------------------------------------------------------------------------------------" << endl;
             if(ifs.good()){
-                while(ifs.read((char*)&musica, sizeof(Musica))){
-                    total += musica.getTempo();
+                while(ifs.read((char*)&artista, sizeof(Artista))){
+                    artista.printFormatado();
                 }
             }
-            cout << "O total de tempo das musicas cadastradas e: " << total << " segundos" << endl;
             ifs.close();
             getch();
         }
         else if(resp = 5){
             system("clear||cls");
-            Musica musica;
-            Musica maior, menor;
-            ifstream ifs("dados.dat", ios_base::in);
-            if(ifs.good()){
-                ifs.read((char*)&musica, sizeof(Musica));
-                maior = musica;
-                menor = musica;
-                while(ifs.read((char*)&musica, sizeof(Musica))){
-                    if(musica.getTempo() > maior.getTempo()){
-                        maior = musica;
-                    }
-                    else if(musica.getTempo() < menor.getTempo()){
-                        menor = musica;
-                    }
-                }
-                cout << "Maior musica: " << endl;
-                cout << maior.getNomeMusica() << " -> " << maior.getTempo() << " segundos\n" << endl;
-                
-                cout << "Menor musica: " << endl;
-                cout << menor.getNomeMusica() << " -> " << menor.getTempo() << " segundos\n" << endl;
-            }
-            ifs.close();
+            cout << "\n------------------------------------------- CADASTRAR ARTISTA -------------------------------------------\n";
+            ofstream ofs("artistas.dat", ios_base::app);
+            char nome[100];
+            char tipo[100];
+            char estilo[100];
+            cin.ignore();
+            cout << "Nome do artista/banda: "; gets(nome);
+            cout << "Tipo de artista(dupla, banda, solo, trio): "; gets(tipo);
+            cout << "Estilo ";
+            if(strcmp(tipo, "banda") == 0)
+                cout << "da banda: ";
+            else if(strcmp(tipo, "solo") == 0)
+                cout << "do cantor: ";
+            else if(strcmp(tipo, "dupla") == 0)
+                cout << "da dupla: ";
+            else
+                cout << "do artista: "; 
+            gets(estilo);
+
+            Artista artista(nome, tipo, estilo);
+
+            ofs.write((char *)&artista, sizeof(Artista));
+
+            ofs.close();
+            cout << "\nCADASTRADO COM SUCESSO...\n";
             getch();
         }
 

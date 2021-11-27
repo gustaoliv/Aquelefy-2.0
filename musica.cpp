@@ -12,10 +12,9 @@ Musica::Musica(){
 
 Musica::Musica(char nome[], char artista[], char estilo[], int temp){
     id = rand() % 1000;
-    strcpy(nomeMusica, nome);
-    strcpy(nomeArtista, artista);
-    strcpy(estiloMusica, estilo);
-    tempo = temp;
+    strcpy(this->nome, nome);
+    strcpy(this->estilo, estilo);
+    duracao = temp;
     time_t mytime = time(NULL);
     struct tm tm = *localtime(&mytime);
     dataAno = tm.tm_year + 1900;
@@ -25,14 +24,14 @@ Musica::Musica(char nome[], char artista[], char estilo[], int temp){
 
 void Musica::printMusica(){
     cout << "Id: " << id << endl;
-    cout << "Nome: " << nomeMusica << endl;
-    cout << "Artista: " << nomeArtista << endl;
-    cout << "Estilo: " << estiloMusica << endl;
-    cout << "Duracao: " << tempo << " segundos"<< endl;
+    cout << "Nome: " << nome << endl;
+    cout << "Artista: " << artista.getNome() << endl;
+    cout << "Estilo: " << estilo << endl;
+    cout << "Duracao: " << duracao << " segundos"<< endl;
     cout << "Data: " << dataDia << "/" << dataMes << "/" << dataAno << endl;
 }
 void Musica::printFormatado(){
-    cout << setw(5) << left << id << " | " << setw(50) << left << nomeMusica << " | "  << setw(50) << left << nomeArtista  << " | " << setw(50) << left << estiloMusica  << " | " << setw(20) << left << tempo << " | " << dataDia << "/" << dataMes << "/" << dataAno << "       | " << endl;
+    cout << setw(5) << left << id << " | " << setw(50) << left << nome << " | "  << setw(50) << left << artista.getNome()  << " | " << setw(50) << left << estilo  << " | " << setw(20) << left << duracao << " | " << dataDia << "/" << dataMes << "/" << dataAno << "       | " << endl;
 
 }
 
@@ -41,9 +40,9 @@ int Musica::getId(){
 }
 
 int Musica::getTempo(){
-    return tempo;
+    return duracao;
 }
 
 string Musica::getNomeMusica(){
-    return nomeMusica;
+    return nome;
 }

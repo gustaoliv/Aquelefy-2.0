@@ -2,16 +2,38 @@
 #include <iostream>
 #include <string.h>
 #include <iomanip>
+#include <fstream>
 using namespace std;
 
 Artista::Artista(){
 }
 
+int verificaId(int id){
+    Artista artistaTemp;
+    ifstream ifs("artistas.dat", ios_base::in);
+    int ok = 0;
+    while(ifs.read((char*)&artistaTemp, sizeof(Artista))){
+        if (artistaTemp.getId() == id){
+            ok = 1;
+        } 
+    }
+    ifs.close();
+    return ok;
+}
+
 Artista::Artista(char nome[], char tipo[], char estilo[]){
-    id = rand() % 1000;
+    
+    do{
+        id = rand() % 1000;
+    }while(verificaId(id) != 0);
+
     strcpy(this->nome, nome);
     strcpy(this->tipo, tipo);
     strcpy(this->estilo, estilo);
+}
+
+int Artista::getId(){
+    return id;
 }
 
 string Artista::getNome(){

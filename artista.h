@@ -13,6 +13,9 @@ class Artista{
         Artista(char nome[], char tipo[], char estilo[]);
         void printFormatado();
 
+        int getId();
+
+
         //nome
         string getNome();
         void setNome(char nome[]);

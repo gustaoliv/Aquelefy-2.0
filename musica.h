@@ -16,7 +16,7 @@ class Musica{
         int dataAno;
     public:
         Musica();
-        Musica(char nome[], char artista[], char estilo[], int temp);
+        Musica(char nome[], Artista artista, char estilo[], int temp);
         void printMusica();
         void printFormatado();
 

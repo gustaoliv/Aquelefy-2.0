@@ -10,10 +10,11 @@ using namespace std;
 Musica::Musica(){
 }
 
-Musica::Musica(char nome[], char artista[], char estilo[], int temp){
+Musica::Musica(char nome[], Artista artista, char estilo[], int temp){
     id = rand() % 1000;
     strcpy(this->nome, nome);
     strcpy(this->estilo, estilo);
+    this->artista = artista;
     duracao = temp;
     time_t mytime = time(NULL);
     struct tm tm = *localtime(&mytime);

@@ -28,13 +28,14 @@ class Artista{
         string getEstilo();
         void setEstilo(char estilo[]);
 
-
+        //sobrecarga do operador de inserção de dados
         friend ostream& operator<<(ostream& os, const Artista& a){
             os << a.nome << "\n";
             os << a.tipo << "\n";
             os << a.estilo << "\n";
         }
 
+        //sobrecarga do operador de extração de dados
         friend istream& operator>>(istream& is, Artista& a){
             is >> a.nome
                >> a.tipo
